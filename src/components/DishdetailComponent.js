@@ -64,9 +64,9 @@ class DishDetail extends Component {
     }
 
     formatDate(date) {
-        const option = {year: 'numeric', month: 'short', day: 'numeric' };
-        const date1 = new Date(date)
-        const newdate = date1.toLocaleDateString("en-US", option)
+        const format = {year: 'numeric', month: 'short', day: '2-digit' };
+        const parsedDate = new Date(Date.parse(date))
+        const newdate = Intl.DateTimeFormat("en-US", format).format(parsedDate)
         return newdate;
     }
 
