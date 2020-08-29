@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
 
-class Dishdetail extends Component {
+class DishDetail extends Component {
 
     renderDish(dish) {
         if (dish != null) {
@@ -26,17 +26,10 @@ class Dishdetail extends Component {
         if(comments != null) {
             const commentsMap = comments.map(comment =>  {
                 return (
-                    <li key={comment.id}>
-                        <p>{comment.comment}</p>
-                        <p>-- {comment.author}, 
-                            &nbsp;
-                            {new Intl.DateTimeFormat('en-US', {
-                                year: 'numeric',
-                                month: 'long',
-                                day: '2-digit'
-                            }).format(new Date(comment.date))
-                        }</p>
-                    </li>
+                    <React.Fragment>
+                        <li>{comment.comment}</li><br />
+                        <li>-- {comment.author}, {this.formatDate(comment.date)}</li><br />
+                    </React.Fragment>
                 )
             })
             return (
@@ -55,20 +48,28 @@ class Dishdetail extends Component {
 
     render() {
         const dish = this.props.dish
-        if (dish == null) {
+        if (dish != null) {
+            const dishItem = this.renderDish(dish)
+            const commentItem = this.renderComments(dish.comments)
+            // const commentItem = this.renderComments(dish)
+            return (
+                <div className='row'>
+                    {dishItem}
+                    {commentItem}
+                </div>
+            )
+        } else {
             return (<div></div>)
         }
-        const dishItem = this.renderDish(dish)
-        const commentItem = this.renderComments(dish.comments)
-        // const commentItem = this.renderComments(dish)
-        return (
-            <div className='row'>
-                {dishItem}
-                {commentItem}
-            </div>
-        )
+    }
+
+    formatDate(date) {
+        const option = {year: 'numeric', month: 'short', day: 'numeric' };
+        const date1 = new Date(date)
+        const newdate = date1.toLocaleDateString("en-US", option)
+        return newdate;
     }
 
 }
 
-export default Dishdetail
+export default DishDetail
