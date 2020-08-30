@@ -3,6 +3,14 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 're
 
 class DishDetail extends Component {
 
+    componentDidMount() {
+        console.log('DishDetail Component componentDidMount is invoked')
+    }
+
+    componentDidUpdate() {
+        console.log('DishDetail DidUpdate invoked')
+    }
+
     renderDish(dish) {
         if (dish != null) {
             return (
@@ -47,6 +55,7 @@ class DishDetail extends Component {
     }
 
     render() {
+        console.log('DishDetail render() invoked')
         const dish = this.props.dish
         if (dish != null) {
             const dishItem = this.renderDish(dish)
