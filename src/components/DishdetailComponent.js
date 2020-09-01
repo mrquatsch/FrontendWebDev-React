@@ -23,11 +23,19 @@ import { Link } from 'react-router-dom';
 
     function RenderComments({comments}) {
         if(comments != null) {
+            console.log(comments)
             const commentsMap = comments.map(comment =>  {
                 return (
                     <React.Fragment>
                         <li>{comment.comment}</li><br />
-                        <li>-- {comment.author}, {FormatDate(comment.date)}</li><br />
+                        <p>-- {comment.author},
+                            &nbsp;
+                            {new Intl.DateTimeFormat('en-US', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: '2-digit'
+                                }).format(new Date(comment.date))}
+                        </p>
                     </React.Fragment>
                 )
             })
@@ -45,9 +53,10 @@ import { Link } from 'react-router-dom';
         }
     }
 
+
     const  DishDetail = (props) => {
         const dish = props.dish
-        if (dish != null) {
+        if (dish != null && dish !== undefined) {
             return (
                 <div className="container">
                 <div className="row">
@@ -73,13 +82,6 @@ import { Link } from 'react-router-dom';
         } else {
             return (<div></div>)
         }
-    }
-
-    function FormatDate(date) {
-        const format = {year: 'numeric', month: 'short', day: '2-digit' };
-        const parsedDate = new Date(Date.parse(date))
-        const newdate = Intl.DateTimeFormat("en-US", format).format(parsedDate)
-        return newdate;
     }
 
 export default DishDetail
