@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
     function RenderDish({dish}) {
         if (dish != null) {
             return (
-                <div className='col-12 col-md-5 m-1'>
+                <React.Fragment>
                     <Card>
                         <CardImg width="100%" src={dish.image} alt={dish.name} />
                         <CardBody>
@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
                             <CardText>{dish.description}</CardText>
                         </CardBody>
                     </Card>
-                </div>
+                </React.Fragment>
             )
         }
         else {
@@ -40,12 +40,12 @@ import { Link } from 'react-router-dom';
                 )
             })
             return (
-                <div className='col-12 col-md-5 m-1'>
+                <React.Fragment>
                     <h4>Comments</h4>
                     <ul className='list-unstyled'>
                         {commentsMap}
                     </ul>
-                </div>
+                </React.Fragment>
             )
         }
         else {
@@ -70,10 +70,10 @@ import { Link } from 'react-router-dom';
                     </div>                
                 </div>
                 <div className="row">
-                    <div className="col-12 col-md-5 m-1">
+                    <div className="col-12 col-md-5 m-1" name="dishDetail">
                         <RenderDish dish={props.dish} />
                     </div>
-                    <div className="col-12 col-md-5 m-1">
+                    <div className="col-12 col-md-5 m-1" name="DishComment">
                         <RenderComments comments={props.comments} />
                     </div>
                 </div>
